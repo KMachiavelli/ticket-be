@@ -8,6 +8,8 @@ import usersRouter from "./src/routes/users";
 import cors from "cors";
 import { corsConfig } from "./src/config/cors";
 import logger from "./src/middleware/logger";
+import { errorHandler } from "./src/middleware/errorHandling";
+import { verifyToken } from "./src/middleware/auth";
 
 const app: Express = express();
 
@@ -18,6 +20,8 @@ app.use(logger());
 
 app.use("/api/v1/ticket", ticketsRouter);
 app.use("/api/v1/user", usersRouter);
+
+app.use(errorHandler);
 
 const port = process.env.PORT;
 

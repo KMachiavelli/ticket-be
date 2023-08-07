@@ -9,15 +9,16 @@ export const getUserById = async (
 ) => {
   const { id } = req.params;
   let user;
-  try {
-    user = await User.findById(id);
-    if (user === null) {
-      return res.status(404).json({ message: "Cannot find user" });
-    }
-  } catch (err: any) {
-    return res.status(500).json({ message: err.message });
+
+  user = await User.findById(id);
+  if (user === null) {
+    throw {
+      ...new Error("Not found"),
+      message: "Cannot find user",
+      status: 404,
+    };
   }
 
-  (req as any).user = user;
+  req.user = user;
   next();
 };

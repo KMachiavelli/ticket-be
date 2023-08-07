@@ -5,6 +5,7 @@ export declare global {
     interface Request {
       user?: User;
       ticket?: Ticket;
+      token?: string;
     }
   }
 }

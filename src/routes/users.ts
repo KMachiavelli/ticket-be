@@ -1,22 +1,17 @@
 import express, { Request, Response } from "express";
-import usersController from "../controllers/users";
+import { usersController } from "../controllers/users";
 import { getUserById } from "../middleware/users";
+import { verifyToken } from "../middleware/auth";
 
 const router = express.Router();
 
 router.post("/", usersController.addUser);
 
-router.get("/cookie", (req: Request, res: Response) => {
-  res
-    .cookie("cookie1", "cookievalue", {
-      sameSite: "lax",
-      domain: ".onrender.com",
-      secure: true,
-    })
-    .send();
-});
+router.post("/authenticate", usersController.authenticateUser);
 
-router.get("/cookie/test", (req: Request, res: Response) => {
+router.get("/test", verifyToken, (req: any, res: any) => {
+  // check this error handling btw
+  console.log(req.user);
   res.send();
 });
 

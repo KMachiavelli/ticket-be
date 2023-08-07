@@ -5,9 +5,11 @@ const router = express.Router();
 
 router.put("/exchange/:id", ticketsController.exchangeTicket);
 
-router.post("/", ticketsController.createTicket);
+router.patch("/cart", ticketsController.patchCart);
 
-router.get("/delivery-cost", ticketsController.getDeliveryCost);
+router.get("/", ticketsController.getTickets);
+
+router.post("/", ticketsController.createTicket);
 
 router
   .route("/:id")

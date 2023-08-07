@@ -1,6 +1,6 @@
 import { Pool } from "pg";
 
-const pool = new Pool({
+export const pool = new Pool({
   host: process.env.PG_DB_HOST,
   database: process.env.PG_DB_NAME,
   port: 5432,
